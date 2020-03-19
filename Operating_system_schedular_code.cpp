@@ -21,7 +21,6 @@ int main()
 		remanning_bt[process_no]=bust_time[process_no];
 		total_time_quantam+=bust_time[process_no];
 	}
-	system("CLS");
 	cout<<"The details of time quantum are as follows:\n";
 	cout<<"\nThe time quantum for first Itration is 3.\n";
 	cout<<"The time quantum for first Itration is 6.\n"; 
@@ -31,7 +30,50 @@ int main()
 	time_quantam_itration=1;
 	current_time=0;
 	remmaning_process=size;
-	
+	for(int Process_no=0;Process_no<remmaning_process;Process_no++) 
+	{	
+		if(remanning_bt[Process_no]<time_quantam_i1 && remanning_bt[Process_no]>=0&&current_time<9)
+		{ 
+			current_time+=remanning_bt[Process_no]; 
+			remanning_bt[Process_no]=0;
+			indicator = 1;
+			time_quantam_itration++;
+			remmaning_process--;
+		} 
+		else if(remanning_bt[Process_no]>0&&current_time<9)
+		{ 
+			if(time_quantam_itration==1)
+			{remanning_bt[Process_no]-=time_quantam_i1; 
+			time_quantam_itration++;
+			current_time+=time_quantam_i1;}
+			else if(time_quantam_itration==2)
+			{remanning_bt[Process_no]-=time_quantam_i2;
+			current_time+=time_quantam_i2;} 
+		} 
+		else if(remanning_bt[Process_no]<9 && remanning_bt[Process_no]>=3&&current_time<9)
+		{ 
+			current_time+=remanning_bt[Process_no]; 
+			remanning_bt[Process_no]=0;  
+			remmaning_process--;
+			indicator = 1;
+		} 
+		else if(remanning_bt[Process_no]>3&&current_time<9)
+		{ 
+			remanning_bt[Process_no]-=time_quantam_i2; 
+			current_time+=time_quantam_i2; 
+		} 
+		if(remanning_bt[Process_no]==0 && indicator==1)			
+		{ 
+			Remening_proc--;	
+			completion_time[Process_no]=current_time;	
+			cout<<completion_time[Process_no];
+			trunaround_time[Process_no]=completion_time[Process_no]-arival_time[Process_no];	
+			waiting_time[Process_no]=trunaround_time[Process_no]-bust_time[Process_no];	
+			indicator = 0;
+                       
+		}  
+		
+	}
 	
 	for(int Process_no=0;Process_no<remmaning_process;Process_no++)
 	{
@@ -39,14 +81,24 @@ int main()
 		int i = 0,j=0;
 	for (i; i < size; i++)
     {
-        if (min > remanning_bt[Process_no] && current_time>arival_time[Process_no])
+        if (min > remanning_bt[i] && current_time>arival_time[i])
 			{
-				min = remanning_bt[Process_no];
+				min = remanning_bt[i];
 			}
   	}
     	
-   
-    	
+    for (j; j < size; j++)	
+    {
+    	if(remanning_bt[j]==min)
+    	break;
+   }
+    	if(current_time>arival_time[j] && min!=100000)
+    	{
+    		remanning_bt[j]=100000; 
+			current_time+=min; 
+			completion_time[j]=current_time;
+				
+		}
 	}
 	
 	
@@ -56,10 +108,5 @@ int main()
         "\nP%d\t\t\t%d\t\t\t%d\t\t\t%d",
         cout<<"\nP"<<i+1<<"\t\t"<<arival_time[i]<<"\t\t"<<bust_time[i]<<"\t\t"<<completion_time[i]<<"\t\t\t"<<trunaround_time[i]<<"\t\t\t"<<waiting_time[i];
     }
-    for(int k=0;k<size;k++)
-    {
-    	avg_waiting_time+=waiting_time[k];
-    	avg_trunaround_time+=trunaround_time[k];
-	}
-
+    
 }
