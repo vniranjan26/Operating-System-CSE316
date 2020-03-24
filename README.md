@@ -8,7 +8,7 @@ Considering 4 processes with the arrival time and the burst time requirement of 
     P4             4            13
     P4            13            10
 
-+ [Problem Solution Code.](#Operating_system_schedular_code.cpp) 
++ [Problem Solution Code.](https://github.com/vniranjan26/Operating-System-CSE316/blob/master/Operating_system_schedular_code.cpp) 
 + [Problem Test Case.](https://#) 
 + [Test Case Explnation.](https://#)
-+ [Report.](os_report.docx) 
++ [Report.](https://github.com/vniranjan26/Operating-System-CSE316/blob/master/OS_report.pdf) 
